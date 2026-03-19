@@ -4,6 +4,7 @@
   --accent-color: #e31e24;
   --dark-color: #333;
   --black-color: #111;
+  --gray-color: #868484;
   --gray-light: #f9f9f9;
   --white-color: #ffffff;
   --error-color: #ff4d4f;
@@ -18,6 +19,7 @@
   --base-color: var(--primary-color);
   --base-font: var(--font-roboto);
   --base-font-size: 14px;
+  --border-radius: 6px;
 }
 
 // @media (prefers-color-scheme: dark) {

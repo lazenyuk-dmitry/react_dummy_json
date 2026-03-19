@@ -1,42 +1,45 @@
 'use client';
-import { useState } from 'react';
-// import styles from './Login.module.scss';
+
+import { SubmitEvent, useState } from 'react';
+import styles from './page.module.scss';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export default function LoginPage() {
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const login = useAuthStore((state) => state.login);
+
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (form.username.length < 3 || form.password.length < 3) {
       setError('Minimum 3 characters required');
       return;
     }
     setError('');
-    console.log('Logging in with:', form);
+    login(form);
   };
 
   return (
-    <main className={styles.loginPage}>
-      <div className={styles.formCard}>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
+    <section className='page-section'>
+      <div className='container'>
+        <h2 className='text-center'>Login</h2>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <Input
             placeholder="Username"
             value={form.username}
             onChange={(e) => setForm({ ...form, username: e.target.value })}
           />
-          <input
-            type="password"
+          <Input
             placeholder="Password"
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
-          {error && <p className={styles.error}>{error}</p>}
-          <button type="submit">Login</button>
+          <Button type="submit">Login</Button>
         </form>
       </div>
-    </main>
+    </section>
   );
 }

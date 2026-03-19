@@ -1,3 +1,5 @@
+import { AuthService } from '@/services/auth.service';
+import { useAuthStore } from '@/store/useAuthStore';
 import axios from 'axios';
 import nprogress from 'nprogress';
 
@@ -11,6 +13,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().user?.accessToken;
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   nprogress.start();
   return config;
 });
@@ -20,7 +26,34 @@ api.interceptors.response.use(
     nprogress.done();
     return response;
   },
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      const user = useAuthStore.getState().user;
+      const refreshToken = user?.refreshToken;
+
+      if (refreshToken) {
+        try {
+          const data = await AuthService.refreshToken(refreshToken);
+
+          useAuthStore.getState().setAuth({
+            ...user,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+          });
+
+          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+          return api(originalRequest);
+        } catch (refreshError) {
+          useAuthStore.getState().logout();
+          return Promise.reject(refreshError);
+        }
+      }
+    }
+
     nprogress.done();
     return Promise.reject(error);
   }

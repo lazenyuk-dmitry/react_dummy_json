@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MainMenu } from "@/components/MainMenu";
+import { AuthProvider } from "@/components/providers";
 
 import "@/styles/global.scss";
 
@@ -27,7 +28,9 @@ export default function RootLayout({
         <Header />
         <MainMenu />
         <main>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </main>
         <Footer />
       </body>

@@ -7,8 +7,10 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
+  gender: string;
   image: string;
-  accessToken: string; // JWT токен
+  accessToken: string;
+  refreshToken: string;
 }
 
 /**

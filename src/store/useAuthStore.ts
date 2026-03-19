@@ -1,27 +1,71 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { AuthService } from '@/services/auth.service';
 import { User } from '@/types';
 
 interface AuthState {
   user: User | null;
   isAuth: boolean;
-  login: (userData: User) => void;
+  isInitializing: boolean;
+  setAuth: (user: User) => void;
   logout: () => void;
+  checkAuth: () => Promise<void>;
+  login: (credentials: Record<string, string>) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       isAuth: false,
-      login: (userData) => set({ user: userData, isAuth: true }),
-      logout: () => {
-        set({ user: null, isAuth: false });
-        // Очищаем локальное хранилище, если нужно
+      isInitializing: true,
+
+      setAuth: (user) => set({ user, isAuth: true, isInitializing: false }),
+
+      logout: () => set({ user: null, isAuth: false, isInitializing: false }),
+
+      /**
+       * Метод для входа в систему
+       */
+      login: async (credentials) => {
+        try {
+          const userData = await AuthService.login(credentials);
+          get().setAuth(userData);
+        } catch (err) {
+          throw err;
+        }
+      },
+
+      /**
+       * Метод восстановления сессии
+       */
+      checkAuth: async () => {
+        const { isAuth, setAuth, logout } = get();
+
+        if (!isAuth) {
+          set({ isInitializing: false });
+          return;
+        }
+
+        try {
+          const userData = await AuthService.getCurrentUser();
+          const currentUser = get().user;
+
+          if (currentUser) {
+            setAuth({ ...currentUser, ...userData } as User);
+          }
+        } catch (err) {
+          console.error("Session restoration failed:", err);
+          logout();
+        } finally {
+          set({ isInitializing: false });
+        }
       },
     }),
     {
-      name: 'auth-storage', // Ключ в localStorage
+      name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ user: state.user, isAuth: state.isAuth }),
     }
   )
 );
