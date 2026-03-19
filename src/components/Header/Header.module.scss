@@ -1,0 +1,51 @@
+.header {
+  color: var(--white-color);
+}
+
+.headerTop {
+  background: var(--black-color);
+  padding: 12px 0;
+}
+
+.headerBottom {
+  padding: 20px 0;
+  background: var(--primary-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.topContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerContactsGroup {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.headerContantItem {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  svg {
+    color: var(--accent-color);
+  }
+}
+
+.logo {
+  font-size: 28px;
+  span {
+    font-size: 2em;
+    line-height: 0;
+    color: var(--accent-color);
+  }
+}
+
+.bottomContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

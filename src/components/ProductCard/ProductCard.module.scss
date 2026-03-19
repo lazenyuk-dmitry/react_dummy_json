@@ -1,0 +1,53 @@
+.card {
+  border: 1px solid #eee;
+  padding: 15px;
+  text-align: center;
+  background: var(--white);
+  transition: var(--transition);
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .imageWrapper {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .category {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .title {
+    font-size: 16px;
+    margin: 10px 0;
+    color: car(--primary-color);
+  }
+  .price {
+    color: car(--accent-color);
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .addBtn {
+    margin-top: 15px;
+    background: car(--primary-color);
+    color: car(--white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    &:hover {
+      background: car(--accent-color);
+    }
+  }
+}

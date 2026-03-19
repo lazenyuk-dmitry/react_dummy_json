@@ -1,0 +1,20 @@
+.mainMenu {
+  box-shadow: 0px -2px 10px 0px var(--dark-color);
+}
+
+.menuList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 -30px;
+}
+
+.menuItem {
+  a {
+    display: inline-block;
+    padding: 40px 30;
+  }
+}
