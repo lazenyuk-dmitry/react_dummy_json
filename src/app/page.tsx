@@ -1,34 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import api from '@/services/api';
-import { Product } from '@/types';
 import { ProductCard } from '@/components/ProductCard/ProductCard';
 import { useAuthStore } from '@/store/useAuthStore';
 import styles from './page.module.scss';
+import { useProducts } from '@/hooks/useProducts';
 
 export default function HomePage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-
   const isAuth = useAuthStore((state) => state.isAuth);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setIsLoading(true);
-        const response = await api.get('/products?limit=12');
-        setProducts(response.data.products);
-      } catch (err) {
-        setError('Failed to load products. Please try again later.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const { products, isLoading, error } = useProducts(12);
 
   if (isLoading) {
     return <div className={styles.loader}>Loading products...</div>;
