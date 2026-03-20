@@ -1,4 +1,6 @@
 .card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--gray-color);
   padding: 15px;
   text-align: center;
@@ -40,9 +42,16 @@
   color: car(--accent-color);
   font-weight: bold;
   font-size: func.rem(18px);
+  margin-top: auto;
 }
 
 .addBtn {
   margin-top: 15px;
   width: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
 }
