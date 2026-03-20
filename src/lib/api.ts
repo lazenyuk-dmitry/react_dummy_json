@@ -8,7 +8,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 nprogress.configure({ showSpinner: false, speed: 400 });
 
 const api = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
