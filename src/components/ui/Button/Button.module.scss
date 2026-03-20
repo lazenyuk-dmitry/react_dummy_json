@@ -1,17 +1,25 @@
 .button {
   background-color: var(--black-color);
   color: var(--white-color);
-  padding: 12px 24px;
+
   border: none;
   border-radius: var(--border-radius);
-  font-size: 16px;
   font-weight: 600;
-
   transition: background-color var(--transition);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  &.md {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  &.sm {
+    padding: 4px 8px;
+    font-size: 14px;
+  }
 
   &:hover:not(:disabled) {
     background-color: var(--dark-color);

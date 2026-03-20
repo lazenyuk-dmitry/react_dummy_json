@@ -2,8 +2,7 @@
 
 import { SubmitEvent, useState } from 'react';
 import styles from './page.module.scss';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Input, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 
 export default function LoginPage() {

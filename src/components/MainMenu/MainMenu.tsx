@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './MainMeny.module.scss'
 
 export const MainMenu = () => {
@@ -10,9 +11,9 @@ export const MainMenu = () => {
           <ul className={styles.menuList}>
             {links.map((item, index) => (
               <li className={styles.menuItem} key={index}>
-                <a href="#">
+                <Link href="/">
                   {item}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

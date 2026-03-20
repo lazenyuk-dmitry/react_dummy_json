@@ -1,10 +1,15 @@
+"use client"
+
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import { FaEnvelope, FaPhone, FaLocationDot, FaUser } from "react-icons/fa6";
+import { useAuthStore } from '@/store/useAuthStore';
+import { Button } from '@/components/ui';
 
 export const Header = () => {
-  const isAuth = false;
-  const user = { firstName: 'Dmitry', lastName: 'L.' };
+  const user = useAuthStore((state) => state.user);
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const logout = useAuthStore((state) => state.logout);
 
   return (
     <header className={styles.header}>
@@ -30,8 +35,13 @@ export const Header = () => {
             {isAuth ? (
               <div className={styles.headerContantItem}>
                 <FaUser />
-                <span>{user.firstName} {user.lastName}</span>
-                <button className={styles.logoutBtn}>Logout</button>
+                <span>{user?.firstName} {user?.lastName}</span>
+                <Button
+                  size='sm'
+                  onClick={() => logout()}
+                >
+                  Logout
+                </Button>
               </div>
             ) : (
               <Link href="/login" className={styles.headerContantItem}>
