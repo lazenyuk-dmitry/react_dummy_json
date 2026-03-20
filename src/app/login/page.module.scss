@@ -5,3 +5,8 @@
   max-width: 400px;
   margin: 0 auto;
 }
+
+.loginError {
+  color: var(--error-color);
+  text-align: center;
+}
