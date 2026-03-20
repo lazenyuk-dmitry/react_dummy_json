@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React Dummy JSON Project
 
-## Getting Started
+Веб-приложение (каталог и авторизация) на Next.js 15, Zustand, TypeScript типизация, Docker контейнеризации.
+Использует [API DummyJSON](https://dummyjson.com/)
 
-First, run the development server:
+## 🚀 Стек технологий
+
+- Next.js 15 (App Router), TypeScript
+- Zustand
+- Axios
+- SCSS / CSS Modules
+- _Linting:_ ESLint 9+ (Flat Config) + simple-import-sort, Prettier, Stylelint
+- _Infrastructure:_ Docker (Multi-stage build)
+
+## 🛠 Настройка окружения
+
+Клонируйте репозиторий
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/lazenyuk-dmitry/react_dummy_json.git
+cd react_dummy_json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Настройте переменные окружения (скопируйте и переименуйте .env.example -> .env)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Можно создать копию командой в терминале
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Linux / macOS / Git Bash
+cp .env.example .env
+# В Windows (PowerShell)
+copy .env.example .env
+```
 
-## Learn More
+Заполните .env
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+NEXT_PUBLIC_BASE_API_URL='https://dummyjson.com'
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🐳 Docker (Production)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Проект оптимизирован для работы в Docker. Используется Standalone режим Next.js, что уменьшает размер образа до ~120MB.
 
-## Deploy on Vercel
+### Сборка и запуск через Docker Compose
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker-compose up --build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Особенности Dockerfile
+
+- Multi-stage build: Разделение на этапы deps, builder и runner.
+- Security: Запуск от имени не-root пользователя (nextjs с UID 1001).
+- Optimization: Копируются только необходимые артефакты (standalone и static).
+
+## 📦 Команды для разработки
+
+### Локальный запуск
+
+```bash
+npm install
+npm run dev
+```
+
+### Линтинг и форматирование
+
+```bash
+npm run lint -- --fix
+```
+
+## 📝 Правила импортов
+
+В проекте настроена автоматическая сортировка импортов по следующим группам:
+
+- React и внешние библиотеки.
+- Внутренние алиасы (@/components, @/lib и т.д.).
+- Относительные пути (../).
+- Локальные файлы (./).
+- Типы.
+- Стили (.scss, .css).
