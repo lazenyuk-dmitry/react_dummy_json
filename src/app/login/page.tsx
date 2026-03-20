@@ -6,11 +6,13 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { PageLoader } from '@/components/PageLoader';
+import { LoginRequest, ValidatorConfig } from '@/types';
+import { validate } from '@/utils/validatator';
 import styles from './page.module.scss';
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ username: '', password: '' });
-  const [errors, setErrors] = useState({ username: '', password: '' });
+  const [form, setForm] = useState<LoginRequest>({ username: '', password: '' });
+  const [errors, setErrors] = useState<Record<keyof LoginRequest, string>>({ username: '', password: '' });
   const [apiError, setApiError] = useState('');
   const [isLoasing, setIsLoading] = useState(false);
 
@@ -20,34 +22,33 @@ export default function LoginPage() {
 
   const router = useRouter();
 
+  const fieldsConfig: Record<keyof LoginRequest, ValidatorConfig> = {
+    username: { fieldName: 'Username', minLength: 3 },
+    password: { fieldName: 'Password', minLength: 3 },
+  }
+
   useEffect(() => {
     if (!isInitializing && isAuth) {
       router.replace('/');
     }
   }, [isAuth, isInitializing, router]);
 
-  const validate = () => {
-    const newErrors = { username: '', password: '' };
-    let isValid = true;
+  const validateForm = () => {
+    const userNameResult = validate(form.username, fieldsConfig.username);
+    const passwordResult = validate(form.password, fieldsConfig.password);
 
-    if (form.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
-      isValid = false;
-    }
+    setErrors({
+      username: userNameResult.message,
+      password: passwordResult.message,
+    });
 
-    if (form.password.length < 3) {
-      newErrors.password = 'Password must be at least 3 characters';
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
+    return userNameResult.isValid && passwordResult.isValid;
   };
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (validate()) {
+    if (validateForm()) {
       try {
         setIsLoading(true);
         await login(form);
@@ -81,6 +82,7 @@ export default function LoginPage() {
           />
           <Input
             placeholder="Password"
+            type='password'
             value={form.password}
             error={errors.password}
             disabled={isLoasing}

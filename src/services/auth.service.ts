@@ -1,5 +1,5 @@
 import api from '@/lib//api';
-import { User } from '@/types';
+import { LoginRequest, RefreshTokenResponde, User } from '@/types';
 
 export const AuthService = {
   /**
@@ -13,7 +13,7 @@ export const AuthService = {
   /**
    * Обновление accessToken через refreshToken
    */
-  async refreshToken(token: string): Promise<{ accessToken: string, refreshToken: string }> {
+  async refreshToken(token: string): Promise<RefreshTokenResponde> {
     const response = await api.post('/auth/refresh', {
       refreshToken: token,
       expiresInMins: 30,
@@ -24,8 +24,8 @@ export const AuthService = {
   /**
    * Вход в систему
    */
-  async login(credentials: Record<string, string>): Promise<User> {
-    const response = await api.post('/auth/login', credentials);
+  async login(payload: LoginRequest): Promise<User> {
+    const response = await api.post('/auth/login', payload);
     return response.data;
   }
 };

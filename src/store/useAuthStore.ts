@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { AuthService } from '@/services/auth.service';
-import { User } from '@/types';
+import { LoginRequest, User } from '@/types';
 
 interface AuthState {
   user: User | null;
@@ -12,7 +12,7 @@ interface AuthState {
   setAuth: (user: User) => void;
   logout: () => void;
   checkAuth: () => Promise<void>;
-  login: (credentials: Record<string, string>) => Promise<void>;
+  login: (credentials: LoginRequest) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -29,7 +29,7 @@ export const useAuthStore = create<AuthState>()(
       /**
        * Метод для входа в систему
        */
-      login: async (credentials) => {
+      login: async (credentials: LoginRequest) => {
         try {
           const userData = await AuthService.login(credentials);
           get().setAuth(userData);

@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Loader.module.scss';
 import clsx from 'clsx';
+import { UISizes } from '@/types';
 
 interface LoaderProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: UISizes;
   className?: string;
 }
 

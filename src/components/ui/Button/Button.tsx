@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Button.module.scss';
 import clsx from 'clsx';
+import { UISizes } from '@/types';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
-  size?: 'sm' | 'md';
+  size?: UISizes;
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, isLoading, className, size = 'md', ...props }) => {
