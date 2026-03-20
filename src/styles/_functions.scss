@@ -1,5 +1,5 @@
 @use 'sass:math';
-@import 'variables';
+@use 'variables' as *;
 
 @function rem($pxValue) {
   @if math.is-unitless($pxValue) {

@@ -1,6 +1,36 @@
-@import 'variables';
 @import 'normalize.css';
 @import 'nprogress/nprogress.css';
+
+:root {
+  /* Основные цвета */
+  --primary-color: #1a1a1d;
+  --accent-color: #e31e24;
+  --dark-color: #333;
+  --black-color: #111;
+  --gray-color: #868484;
+  --gray-light: #f9f9f9;
+  --white-color: #ffffff;
+  --error-color: #ff4d4f;
+
+  /* Размеры и анимации */
+  --container-width: 1200px;
+  --transition: 0.3s ease;
+  --border-radius: 4px;
+
+  // Базовые стили
+  --base-bg: var(--white-color);
+  --base-color: var(--primary-color);
+  --base-font: var(--font-roboto);
+  --base-font-size: $base-font-size;
+  --border-radius: 6px;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --background: #0a0a0a;
+//     --foreground: #ededed;
+//   }
+// }
 
 html {
   height: 100%;
