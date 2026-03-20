@@ -1,6 +1,7 @@
 'use client'
 
 import { useAuthStore } from '@/store/useAuthStore';
+
 import styles from './Footer.module.scss';
 
 export const Footer = () => {

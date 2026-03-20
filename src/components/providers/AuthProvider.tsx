@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, ReactNode } from 'react';
+import { ReactNode,useEffect } from 'react';
+
 import { useAuthStore } from '@/store/useAuthStore';
 
 interface AuthProviderProps {

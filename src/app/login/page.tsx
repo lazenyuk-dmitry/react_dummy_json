@@ -1,13 +1,15 @@
 'use client';
 
-import { SubmitEvent, useEffect, useState } from 'react';
-import { Input, Button } from '@/components/ui';
-import { useAuthStore } from '@/store/useAuthStore';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { SubmitEvent, useEffect, useState } from 'react';
+
 import { PageLoader } from '@/components/PageLoader';
+import { Button,Input } from '@/components/ui';
+import { useAuthStore } from '@/store/useAuthStore';
 import { LoginRequest, ValidatorConfig } from '@/types';
 import { validate } from '@/utils/validatator';
+
 import styles from './page.module.scss';
 
 export default function LoginPage() {

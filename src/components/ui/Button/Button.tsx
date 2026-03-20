@@ -1,7 +1,9 @@
-import React from 'react';
-import styles from './Button.module.scss';
 import clsx from 'clsx';
+import React from 'react';
+
 import { UISizes } from '@/types';
+
+import styles from './Button.module.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;

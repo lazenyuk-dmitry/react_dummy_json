@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '../ui';
 import styles from './ProductCard.module.scss';
 
 interface ProductProps {

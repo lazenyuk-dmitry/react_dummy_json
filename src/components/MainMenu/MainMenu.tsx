@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import styles from './MainMenu.module.scss'
 
 export const MainMenu = () => {

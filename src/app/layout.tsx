@@ -1,12 +1,13 @@
+import "@/styles/global.scss";
+
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { Header } from "@/components/Header";
+import { Toaster } from "react-hot-toast";
+
 import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { MainMenu } from "@/components/MainMenu";
 import { AuthProvider } from "@/components/providers";
-
-import "@/styles/global.scss";
-import { Toaster } from "react-hot-toast";
 
 const robotoFont = Roboto({
   variable: "--font-roboto",

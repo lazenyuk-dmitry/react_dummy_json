@@ -1,4 +1,5 @@
 import { Loader } from "@/components/ui"
+
 import styles from './PageLoader.module.scss';
 
 export const PageLoader = () => {

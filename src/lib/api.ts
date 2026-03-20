@@ -1,8 +1,9 @@
-import { AuthService } from '@/services/auth.service';
-import { useAuthStore } from '@/store/useAuthStore';
 import axios from 'axios';
 import nprogress from 'nprogress';
 import toast from 'react-hot-toast';
+
+import { AuthService } from '@/services/auth.service';
+import { useAuthStore } from '@/store/useAuthStore';
 
 nprogress.configure({ showSpinner: false, speed: 400 });
 

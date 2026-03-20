@@ -1,9 +1,10 @@
 'use client';
 
-import { ProductCard } from '@/components/ProductCard/ProductCard';
-import { useAuthStore } from '@/store/useAuthStore';
-import { useProducts } from '@/hooks/useProducts';
 import { PageLoader } from '@/components/PageLoader';
+import { ProductCard } from '@/components/ProductCard/ProductCard';
+import { useProducts } from '@/hooks/useProducts';
+import { useAuthStore } from '@/store/useAuthStore';
+
 import styles from './page.module.scss';
 
 export default function HomePage() {

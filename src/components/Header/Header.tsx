@@ -1,11 +1,13 @@
 "use client"
 
-import Link from 'next/link';
-import styles from './Header.module.scss';
-import { FaEnvelope, FaPhone, FaLocationDot, FaUser } from "react-icons/fa6";
-import { useAuthStore } from '@/store/useAuthStore';
-import { Button } from '@/components/ui';
 import clsx from 'clsx';
+import Link from 'next/link';
+import { FaEnvelope, FaLocationDot, FaPhone, FaUser } from "react-icons/fa6";
+
+import { Button } from '@/components/ui';
+import { useAuthStore } from '@/store/useAuthStore';
+
+import styles from './Header.module.scss';
 
 export const Header = () => {
   const user = useAuthStore((state) => state.user);

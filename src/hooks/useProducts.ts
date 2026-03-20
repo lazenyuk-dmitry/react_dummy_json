@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Product } from '@/types';
+import { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
+
 import { CatalogService } from '@/services/catalog.service';
+import { Product } from '@/types';
 
 /**
  * Хук для получения списка товаров.
@@ -20,8 +22,10 @@ export const useProducts = (limit: number = 12) => {
         const response = await CatalogService.getProducts(limit);
 
         setProducts(response.products);
-      } catch (err: any) {
-        setError(err.response?.data?.message || 'Failed to load products');
+      } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+          setError(err.response?.data?.message || 'Failed to load products');
+        }
       } finally {
         setIsLoading(false);
       }

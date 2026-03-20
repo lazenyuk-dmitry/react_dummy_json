@@ -2,6 +2,7 @@
 
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+
 import { AuthService } from '@/services/auth.service';
 import { LoginRequest, User } from '@/types';
 
