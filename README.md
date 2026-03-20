@@ -1,7 +1,10 @@
 # React Dummy JSON Project
 
 Веб-приложение (каталог и авторизация) на Next.js 15, Zustand, TypeScript типизация, Docker контейнеризации.
+Авторизация реализованна черезз сохранение данных в LocalStorrage, в идеале конечно сделать SSR и httpOnly cookies, но для тестового норм.
 Использует [API DummyJSON](https://dummyjson.com/)
+
+- DEMO HERE: https://react-dummy-json-beta.vercel.app/
 
 ## 🚀 Стек технологий
 
