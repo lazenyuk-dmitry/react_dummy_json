@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Button.module.scss';
+import clsx from 'clsx';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
@@ -7,8 +8,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, isLoading, className, size = 'md', ...props }) => {
-  const defaultClassName = `${styles.button} ${styles[size]}`;
-  const combinedClassName = className ? `${defaultClassName} ${className}` : defaultClassName;
+  const defaultClassName = clsx(styles.button, styles[size]);
+  const combinedClassName = className ? clsx(defaultClassName, className) : defaultClassName;
 
   return (
     <button

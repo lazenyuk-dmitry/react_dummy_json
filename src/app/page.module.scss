@@ -16,13 +16,9 @@
   }
 }
 
-.loader,
 .error {
+  color: var(--accent-color);
   text-align: center;
   padding: 100px;
   font-size: 18px;
-}
-
-.error {
-  color: var(--accent-color);
 }

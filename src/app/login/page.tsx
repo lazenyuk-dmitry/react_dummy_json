@@ -1,10 +1,12 @@
 'use client';
 
-import { SubmitEvent, useState } from 'react';
-import styles from './page.module.scss';
+import { SubmitEvent, useEffect, useState } from 'react';
 import { Input, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+import { PageLoader } from '@/components/PageLoader';
+import styles from './page.module.scss';
 
 export default function LoginPage() {
   const [form, setForm] = useState({ username: '', password: '' });
@@ -13,6 +15,16 @@ export default function LoginPage() {
   const [isLoasing, setIsLoading] = useState(false);
 
   const login = useAuthStore((state) => state.login);
+  const isInitializing = useAuthStore((state) => state.isInitializing);
+  const isAuth = useAuthStore((state) => state.isAuth);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isInitializing && isAuth) {
+      router.replace('/');
+    }
+  }, [isAuth, isInitializing, router]);
 
   const validate = () => {
     const newErrors = { username: '', password: '' };
@@ -50,6 +62,10 @@ export default function LoginPage() {
       }
     }
   };
+
+  if (isInitializing) {
+    return <PageLoader />
+  }
 
   return (
     <section className='page-section'>

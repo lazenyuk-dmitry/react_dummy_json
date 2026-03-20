@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui';
 import styles from './ProductCard.module.scss';
 
 interface ProductProps {
@@ -18,7 +19,7 @@ export const ProductCard = ({ title, category, price, image, isAuth }: ProductPr
         <p className={styles.category}>{category}</p>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.price}>${price}</p>
-        {isAuth && <button className={styles.addBtn}>Add to cart</button>}
+        {isAuth && <Button className={styles.addBtn}>Add to cart</Button>}
       </div>
     </div>
   );

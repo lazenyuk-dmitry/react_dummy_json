@@ -29,7 +29,7 @@ export default function RootLayout({
         <Toaster position="bottom-right" reverseOrder={false} />
         <Header />
         <MainMenu />
-        <main>
+        <main className="main">
           <AuthProvider>
             {children}
           </AuthProvider>

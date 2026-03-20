@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import api from '@/lib/api';
 import { Product } from '@/types';
+import { CatalogService } from '@/services/catalog.service';
 
 /**
  * Хук для получения списка товаров.
- * @param limit - количество загружаемых товаров (по умолчанию 12 по ТЗ)
+ * @param limit - количество загружаемых товаров (по умолчанию 12)
  */
 export const useProducts = (limit: number = 12) => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,9 +17,9 @@ export const useProducts = (limit: number = 12) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await api.get(`/products?limit=${limit}`);
+        const response = await CatalogService.getProducts(limit);
 
-        setProducts(response.data.products);
+        setProducts(response.products);
       } catch (err: any) {
         setError(err.response?.data?.message || 'Failed to load products');
       } finally {

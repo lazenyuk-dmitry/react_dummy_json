@@ -2,15 +2,16 @@
 
 import { ProductCard } from '@/components/ProductCard/ProductCard';
 import { useAuthStore } from '@/store/useAuthStore';
-import styles from './page.module.scss';
 import { useProducts } from '@/hooks/useProducts';
+import { PageLoader } from '@/components/PageLoader';
+import styles from './page.module.scss';
 
 export default function HomePage() {
   const isAuth = useAuthStore((state) => state.isAuth);
   const { products, isLoading, error } = useProducts(12);
 
   if (isLoading) {
-    return <div className={styles.loader}>Loading products...</div>;
+    return <PageLoader />;
   }
 
   if (error) {
