@@ -1,7 +1,6 @@
-'use client'
-
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { createJSONStorage, persist, StateStorage } from 'zustand/middleware';
+import Cookies from 'js-cookie';
 import { AuthService } from '@/services/auth.service';
 import { User } from '@/types';
 
@@ -14,6 +13,14 @@ interface AuthState {
   checkAuth: () => Promise<void>;
   login: (credentials: Record<string, string>) => Promise<void>;
 }
+
+const cookieStorage: StateStorage = {
+  getItem: (name) => Cookies.get(name) ?? null,
+  setItem: (name, value) => {
+    Cookies.set(name, value, { expires: 7, path: '/', sameSite: 'strict' });
+  },
+  removeItem: (name) => Cookies.remove(name),
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -66,8 +73,15 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => cookieStorage),
       partialize: (state) => ({ user: state.user, isAuth: state.isAuth }),
+      onRehydrateStorage: (state) => {
+        return (state, error) => {
+          if (state) {
+            state.isInitializing = false;
+          }
+        };
+      },
     }
   )
 );
