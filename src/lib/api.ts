@@ -2,6 +2,7 @@ import { AuthService } from '@/services/auth.service';
 import { useAuthStore } from '@/store/useAuthStore';
 import axios from 'axios';
 import nprogress from 'nprogress';
+import toast from 'react-hot-toast';
 
 nprogress.configure({ showSpinner: false, speed: 400 });
 
@@ -54,6 +55,8 @@ api.interceptors.response.use(
       }
     }
 
+    const errorMsg = error?.response?.data?.message || error.message;
+    toast.error(`ApiError: \n ${errorMsg}`);
     nprogress.done();
     return Promise.reject(error);
   }

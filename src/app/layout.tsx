@@ -6,6 +6,7 @@ import { MainMenu } from "@/components/MainMenu";
 import { AuthProvider } from "@/components/providers";
 
 import "@/styles/global.scss";
+import { Toaster } from "react-hot-toast";
 
 const robotoFont = Roboto({
   variable: "--font-roboto",
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${robotoFont.variable}`}>
       <body>
+        <Toaster position="bottom-right" reverseOrder={false} />
         <Header />
         <MainMenu />
         <main>
