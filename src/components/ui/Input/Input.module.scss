@@ -1,5 +1,5 @@
 .label {
-  font-size: 14px;
+  font-size: func.rem(14px);
   font-weight: 600;
   color: var(--primary-color);
 }
@@ -7,11 +7,11 @@
 .input {
   display: block;
   width: 100%;
-  padding: 12px 16px;
+  padding: func.rem(12px) func.rem(16px);
   border: 1px solid var(--gray-color);
   border-radius: var(--border-radius);
   background: var(--white-color);
-  font-size: 16px;
+  font-size: func.rem(16px);
   color: var(--primmary-color);
   transition:
     border-color,
@@ -29,5 +29,5 @@
 
 .errorText {
   color: var(--error-color);
-  font-size: 12px;
+  font-size: func.rem(12px);
 }

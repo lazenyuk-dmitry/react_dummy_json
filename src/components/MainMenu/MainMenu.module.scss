@@ -1,0 +1,37 @@
+.mainMenu {
+  box-shadow: 0px -2px 10px 0px var(--dark-color);
+}
+
+.menuList {
+  display: flex;
+  align-items: center;
+  gap: func.rem(10px);
+  list-style: none;
+  font-size: func.rem(20px);
+  font-weight: bold;
+  margin: 0 func.rem(-30px);
+
+  @media (max-width: $break-md) {
+    font-size: func.rem(16px);
+    margin: 0 func.rem(-10px);
+  }
+
+  @media (max-width: $break-sm) {
+    font-size: func.rem(14px);
+    margin: 0;
+  }
+}
+
+.menuItem {
+  a {
+    display: inline-block;
+    padding: func.rem(40px) func.rem(30px);
+
+    @media (max-width: $break-md) {
+      padding: func.rem(20px) func.rem(10px);
+    }
+    @media (max-width: $break-sm) {
+      padding: func.rem(10px) 0;
+    }
+  }
+}

@@ -12,13 +12,13 @@
   cursor: pointer;
 
   &.md {
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: func.rem(12px) func.rem(24px);
+    font-size: func.rem(16px);
   }
 
   &.sm {
     padding: 4px 8px;
-    font-size: 14px;
+    font-size: func.rem(14px);
   }
 
   &:hover:not(:disabled) {

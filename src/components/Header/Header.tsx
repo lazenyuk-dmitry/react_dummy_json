@@ -5,6 +5,7 @@ import styles from './Header.module.scss';
 import { FaEnvelope, FaPhone, FaLocationDot, FaUser } from "react-icons/fa6";
 import { useAuthStore } from '@/store/useAuthStore';
 import { Button } from '@/components/ui';
+import clsx from 'clsx';
 
 export const Header = () => {
   const user = useAuthStore((state) => state.user);
@@ -19,21 +20,21 @@ export const Header = () => {
             <span className={styles.headerContactsGroup}>
               <a href="tel:+021-95-51-84" className={styles.headerContantItem}>
                 <FaPhone />
-                +021-95-51-84
+                <span className={styles.itemText}>+021-95-51-84</span>
               </a>
               <a href="mailto:shop@abelohost.com" className={styles.headerContantItem}>
                 <FaEnvelope />
-                shop@abelohost.com
+                <span className={styles.itemText}>shop@abelohost.com</span>
               </a>
               <a href="#" className={styles.headerContantItem}>
                 <FaLocationDot />
-                1734 Stonecoald Streat
+                <span className={styles.itemText}>1734 Stonecoald Streat</span>
               </a>
 
             </span>
 
             {isAuth ? (
-              <div className={styles.headerContantItem}>
+              <div className={clsx(styles.headerContantItem, styles.headerLogin)}>
                 <FaUser />
                 <span>{user?.firstName} {user?.lastName}</span>
                 <Button
@@ -44,7 +45,7 @@ export const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Link href="/login" className={styles.headerContantItem}>
+              <Link href="/login" className={clsx(styles.headerContantItem, styles.headerLogin)}>
                 <FaUser />
                 Login
               </Link>
@@ -60,6 +61,7 @@ export const Header = () => {
             </Link>
 
             <img
+              className={styles.headerImg}
               src="https://placehold.co/600x70"
               alt="Placeholder image"
               width={600}

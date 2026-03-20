@@ -27,11 +27,11 @@
 .category {
   color: var(--gray-color);
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: func.rem(11px);
 }
 
 .title {
-  font-size: 16px;
+  font-size: func.rem(16px);
   margin: 10px 0;
   color: car(--primary-color);
 }
@@ -39,7 +39,7 @@
 .price {
   color: car(--accent-color);
   font-weight: bold;
-  font-size: 18px;
+  font-size: func.rem(18px);
 }
 
 .addBtn {

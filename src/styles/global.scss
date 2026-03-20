@@ -54,14 +54,14 @@ main {
 }
 
 h2 {
-  font-size: 24px;
-  margin-bottom: 30px;
+  font-size: func.rem(24px);
+  margin-bottom: func.rem(30px);
   text-align: left;
   font-weight: 700;
 }
 
 .page-section {
-  padding: 40px 0;
+  padding: func.rem(40px) 0;
 }
 
 .text-center {

@@ -8,7 +8,7 @@
 }
 
 .headerBottom {
-  padding: 20px 0;
+  padding: func.rem(20px) 0;
   background: var(--primary-color);
   border-bottom: 2px solid var(--accent-color);
 }
@@ -17,26 +17,51 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .headerContactsGroup {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
+  min-width: 0;
 }
 
 .headerContantItem {
   display: flex;
   gap: 4px;
   align-items: center;
+  white-space: nowrap;
+  min-width: 0;
+
+  .itemText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+
+    @media (max-width: $break-md) {
+      display: none;
+    }
+  }
 
   svg {
+    flex-shrink: 0;
     color: var(--accent-color);
   }
 }
 
+.headerLogin {
+  min-width: auto;
+}
+
 .logo {
-  font-size: 28px;
+  font-size: func.rem(28px);
+  white-space: nowrap;
+
+  @media (max-width: $break-sm) {
+    font-size: func.rem(20px);
+  }
+
   span {
     font-size: 2em;
     line-height: 0;
@@ -48,4 +73,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+
+  @media (max-width: $break-md) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.headerImg {
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
 }

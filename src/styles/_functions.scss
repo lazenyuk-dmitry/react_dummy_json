@@ -1,0 +1,10 @@
+@use 'sass:math';
+@import 'variables';
+
+@function rem($pxValue) {
+  @if math.is-unitless($pxValue) {
+    $pxValue: $pxValue * 1px;
+  }
+
+  @return math.div($pxValue, $base-font-size) * 1rem;
+}
