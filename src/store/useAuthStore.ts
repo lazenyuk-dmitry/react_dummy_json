@@ -31,12 +31,8 @@ export const useAuthStore = create<AuthState>()(
        * Метод для входа в систему
        */
       login: async (credentials: LoginRequest) => {
-        try {
-          const userData = await AuthService.login(credentials);
-          get().setAuth(userData);
-        } catch (err) {
-          throw err;
-        }
+        const userData = await AuthService.login(credentials);
+        get().setAuth(userData);
       },
 
       /**

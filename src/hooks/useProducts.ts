@@ -26,6 +26,7 @@ export const useProducts = (limit: number = 12) => {
         if (err instanceof AxiosError) {
           setError(err.response?.data?.message || 'Failed to load products');
         }
+        throw err;
       } finally {
         setIsLoading(false);
       }
